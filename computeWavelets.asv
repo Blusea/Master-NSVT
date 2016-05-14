@@ -1,0 +1,30 @@
+function D = computeWavelets(signals, scale, wavelet)
+%[wavResC  wavResL]
+%wavResC=zeros(size(signals),length(signals));
+%wavResL=zeros(size(signals),length(signals));
+for i=1:size(signals)
+    [c,l]=wavedec(signals(i,:),scale,wavelet); 
+   % A3 = wrcoef('a',c,l,wavelet,scale);
+    %{
+    % D1 = wrcoef('d',wavResC,wavResL,'db1',1);
+    %D2 = wrcoef('d',wavResC,wavResL,'db1',2);
+    D3 = wrcoef('d',c,l,wavelet,scale) ;
+    wavResC(i,:)=D3;
+    wavResL(i,:)=A3;
+    %}
+    D=zeros(8);
+    D(1) = wrcoef('d',c,l,wavelet,1);
+    D(2) = wrcoef('d',c,l,wavelet,2);
+    D(3 )= wrcoef('d',c,l,wavelet,3);
+    D(4) = wrcoef('d',c,l,wavelet,4) ;
+    D(5) = wrcoef('d',c,l,wavelet,5) ;
+    D(6) = wrcoef('d',c,l,wavelet,6) ;
+    D(7) = wrcoef('d',c,l,wavelet,7) ;
+    D(8) = wrcoef('d',c,l,wavelet,8) ;
+end
+%{
+figure(3);
+plot(signals(1,:));
+figure(4);
+plot(wavResC(1,:));
+%}

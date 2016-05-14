@@ -1,0 +1,30 @@
+function  dc1 = computeDCOvLapWindows(Signals,Files,fig)
+
+dc1=zeros(length(Files),4);
+
+
+for k=1:length(Files)
+    i=1;
+    m=1;
+   while (m<5)
+       
+       dctemp=DCBiToBit(Signals(k,i:i+255));
+       disp(dctemp);
+        dc1(k,m)=dctemp(1);
+        m=m+1;
+        i=i+240;
+    end
+    
+end
+
+dc1(isnan(dc1))=0;
+final=zeros(1,16);
+for k=1:16
+    final(1,k)=mean(dc1(:,k));
+end
+
+figure(fig);
+plot(final);
+title('dcBB with  overlapping windows');
+xlabel('windows');
+ylabel('dc');

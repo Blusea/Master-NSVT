@@ -1,0 +1,32 @@
+function  final = computeFFTOvLapWindows(Signals,Files,fig)
+
+fft1=zeros(length(Files),16);
+fs=100; %Sample frequency (hz)
+
+for k=1:length(Files)
+   
+       m = 64;          % Window length
+        n = pow2(nextpow2(m)); 
+        fft_temp=fft(Signals(k,i:i+63),n);
+        f = (0:n-1)*(fs/n);     % Frequency range
+        power = fft_temp.*conj(fft_temp)/n;
+        disp(f);
+        fft1(k,m)=mean(power);
+       
+        i=i+57;
+    end
+    
+end
+disp(i);
+%%%
+%%
+final=zeros(1,16);
+for k=1:16
+    final(1,k)=mean(fft1(:,k));
+end
+
+figure(fig);
+plot(f,final);
+title('fft with  overlapping windows');
+xlabel('frequency');
+ylabel('power');

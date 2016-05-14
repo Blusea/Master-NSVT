@@ -1,0 +1,106 @@
+clc;
+clear all;
+close all;
+
+
+Files3 = dir('old/*.txt');
+Old = storeOld(Files3);
+rateSep1 = computeRythmSepWindows(Old,Files3,3);
+
+
+rateOv1 = computeRythmOvLapWindows(Old,Files3,3);
+
+meanNNOldOver=computeMeanNNOvLapWindows(Old,Files3,2);
+
+
+meanNNOldSep=computeMeanNNSepWindows(Old,Files3,2);
+
+
+pNN50OldOver=computecomputePNN50OvLapWindows(Old,Files3,1);
+
+
+PNN50Old = computePNN50SepWindows(Old,Files3,1);
+
+
+RMSSDOldSep=computeRMSSDSepWindows(Old,Files3,2);
+
+
+RMSSDOldOv=computeRMSSDOvLapWindows(Old,Files3,2);
+
+
+
+dcBBSepO  = computedcBBSepWindows(Old,Files3,3);
+
+
+dcBBO=computeDCOvLapWindows(Old,Files3,4);
+
+
+dcSignO=computeDCSignOvLapWindows(Old,Files3,5);
+
+
+
+dcSO=computedcSignSepWindows(Old,Files3,6);
+sdnnOLD= computeSDNNOvWin(Old,Files3,6);
+
+
+%
+sdnnOldS= computeSDNNSepWin(Old,Files3,6);
+
+Files4 = dir('young/*.txt');
+Young = storeYoung(Files4);
+
+
+
+sdnnOY= computeSDNNOvWin(Young,Files4,3);
+pSDNNOV = computePdifChang(mean(sdnnOY),mean(sdnnOLD));
+
+sdnnY= computeSDNNSepWin(Young,Files4,3);
+pSDNNSEp = computePdifChang(mean(sdnnY),mean(sdnnOldS));
+
+meanNNYoungOver=computeMeanNNOvLapWindows(Young,Files4,3);
+pmeanOver= computePdifChang(mean(meanNNYoungOver),mean(meanNNOldOver));
+
+meanNNYoungSep=computeMeanNNSepWindows(Young,Files4,2);
+pmeanSep= computePdifChang(mean(meanNNYoungSep),mean(meanNNOldSep));
+
+
+pNN50YoungOver=computecomputePNN50OvLapWindows(Young,Files4,1);
+ppnn50Over= computePdifChang(mean(pNN50YoungOver),mean(pNN50oldOver));
+
+PNN50Young = computePNN50SepWindows(Young,Files4,1);
+ppnn50Sep= computePdifChang(mean(PNN50Young),mean(PNN50Old));
+
+
+RMSSDYoungSep=computeRMSSDSepWindows(Young,Files4,2);
+
+
+RMSSDYoungOv=computeRMSSDOvLapWindows(Young,Files4,2);
+
+
+
+rateSep2 = computeRythmSepWindows(Young,Files4,2);
+
+
+
+rateOv2 = computeRythmOvLapWindows(Young,Files4,4);
+
+
+
+
+dcBBSepY = computedcBBSepWindows(Young,Files4,10);
+
+dcBBY=computeDCOvLapWindows(Young,Files4,11);
+
+
+dcSignY=computeDCSignOvLapWindows(Young,Files4,12);
+
+
+dcSY=computeDCSignSepWindows(Young,Files4,13);
+
+ 
+
+
+
+
+
+p = computePdifChang(mean(rateMalesSep),mean(ratensvtSep));

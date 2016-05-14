@@ -1,0 +1,14 @@
+function db = DCsignPlot(Signals)
+
+db= zeros(size(Signals,1));
+for k=1 :size(Signals,1)
+    db(k)=(DCsign(Signals(k,:)));
+end
+
+%figure(2);
+%plot(db);
+%title('...');
+%xlabel('...');
+%ylabel('...');
+
+

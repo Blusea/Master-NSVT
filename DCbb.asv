@@ -1,0 +1,13 @@
+function db = DCbb(Signals)
+
+db= zeros(size(Signals),length(Signals));
+for k=1 :length(Signals)
+    db(:,k)=DCBiToBit(Signals(:,k));
+end
+
+
+figure(1);
+plot(1:1024,db);
+title('...');
+xlabel('...');
+ylabel('...');
